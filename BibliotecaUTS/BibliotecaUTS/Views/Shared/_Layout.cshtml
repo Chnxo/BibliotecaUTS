@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Biblioteca UTS</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/favicon.ico" rel="icon" type="image/ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap/bootstrap.min.css")
+    @Styles.Render("~/Content/bootstrap/bootstrap-responsive.min.css")
+</head>
+<body>
+    @* Menu *@
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="menu">
+                <div class="container">
+                    <a type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar">
+                        </span></a><a class="brand" href="#">Biblioteca UTS</a>
+                    <div class="nav-collapse in collapse">
+                        <!-- .nav, .navbar-search, .navbar-form, etc -->
+                        <ul class="nav">
+                            <li><a href="#">Libros</a> </li>
+                            <li><a href="#">Editoriales</a> </li>
+                            <li><a href="#">Autores</a> </li>
+                            <li><a href="#">Catogorías</a> </li>
+                            <li id="usuarioMenu">@Html.ActionLink("Usuarios", "Usuarios", "Usuario")</li>
+                            <li><a href="#">Iniciar Sesión</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="shadow">
+            @* Contenido *@
+            <div class="row-fluid contenido">
+                <div class="span12 content" ng-app="bibliotecaApp">
+                    @RenderBody()
+                </div>
+            </div>
+            @* Pie *@
+            <div class="row-fluid pie">
+                <div class="span12 text-center">
+                    <p>
+                        Dr. Norman E. Borlaung Km. 14 | Cd. Obregón, Son. | C.P. 850955</p>
+                    <p>
+                        Intranet | Tels. (644) 414-86-87</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/bootstrap/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/angular/angular.min.js")
+    @Scripts.Render("~/Scripts/angular/BibliotecaModule.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -10,6 +10,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Datos;
+using Autofac.Integration.WebApi;
 
 namespace BibliotecaUTS
 {
@@ -34,6 +35,7 @@ namespace BibliotecaUTS
         {
             var builder = new ContainerBuilder();
             var assembly = Assembly.GetExecutingAssembly();
+            builder.RegisterApiControllers(assembly);
 
             builder.RegisterControllers(assembly);
             builder.RegisterAssemblyTypes(assembly).Where(t => t.Name.EndsWith("Repository")).AsImplementedInterfaces();
@@ -42,6 +44,10 @@ namespace BibliotecaUTS
             var container = builder.Build();
             var resolver = new AutofacDependencyResolver(container);
             DependencyResolver.SetResolver(resolver);
+
+            // This override is needed because Web API is not using DependencyResolver to build controllers
+            var apiResolver = new AutofacWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = apiResolver;
         }
     }
 }

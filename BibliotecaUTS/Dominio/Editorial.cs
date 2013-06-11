@@ -15,5 +15,7 @@ namespace Dominio
 
         [Required]
         public string Nombre { get; set; }
+
+        public virtual IList<Libro> Libros { get; set; }
     }
 }

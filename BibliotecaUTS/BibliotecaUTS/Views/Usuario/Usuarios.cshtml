@@ -5,7 +5,7 @@
 <div ng-cloak ng-controller="UsuarioCtrl">
     <h2>
         Usuarios</h2>
-    <button class="btn">
+    <button class="btn" ng-click="abrirUsuarioForm()">
         Agregar Usuario</button>
     <input type="text" name="BuscarUsuario" placeholder="Buscar Usuario..." class="input-xlarge pull-right" />
     <table class="table table-bordered table-striped table-hover">
@@ -52,11 +52,64 @@
             <li><a href="#">»</a></li>
         </ul>
     </div>
+    @* Modals *@
+    <div id="usuarioForm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="myModalLabel">
+                {{usuarioFormLabel}}</h3>
+        </div>
+        <div class="modal-body">
+            <form novalidate class="form-horizontal" name="formaUsuario">
+            <fieldset>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Usuario.NombreUsuario, new { @class = "control-label" })
+                    <div class="controls">
+                        <input type="text" name="nombreUsuario" required ng-model="usuario.NombreUsuario" />
+                        <span class="text-error">*</span>
+                        <br />
+                        <span class="error text-error" ng-show="formaUsuario.nombreUsuario.$error.required && formaUsuario.nombreUsuario.$dirty"
+                            name="nombreMessage">Usuario es requerido</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Usuario.Correo, new { @class = "control-label" })
+                    <div class="controls">
+                        <input type="email" name="correoUsuario" required ng-model="usuario.Correo" placeholder="ejemplo@ejemplo.com" />
+                        <span class="text-error">*</span>
+                        <br />
+                        <span class="error text-error" ng-show="formaUsuario.correoUsuario.$error.required && formaUsuario.correoUsuario.$dirty"
+                            name="nombreMessage">Correo es requerido</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Usuario.Password, new { @class = "control-label" })
+                    <div class="controls">
+                        <input type="text" name="passwordUsuario" required ng-model="usuario.Password" />
+                        <span class="text-error">*</span>
+                        <br />
+                        <span class="error text-error" ng-show="formaUsuario.passwordUsuario.$error.required && formaUsuario.passwordUsuario.$dirty"
+                            name="nombreMessage">Contraseña es requerido</span>
+                    </div>
+                </div>
+            </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                Cancelar</button>
+            <button class="btn btn-success" ng-disabled="formaUsuario.$invalid || formaUsuario.$pristine" ng-click="summitForma()">
+                {{accionForma}}</button>
+        </div>
+    </div>
 </div>
 @section scripts{
     @Scripts.Render("~/Scripts/angular/Controllers/usuarioCtrl.js")
     <script type="text/javascript">
         $("#usuarioMenu").addClass("active");
-        viewModel = @BibliotecaUTS.Core.Serializer.SerializeHtml(Model);
+        globalDTO.viewModel = @BibliotecaUTS.Core.Serializer.SerializeHtml(Model);
+        globalDTO.modalForm = $('#usuarioForm');
     </script>
 }

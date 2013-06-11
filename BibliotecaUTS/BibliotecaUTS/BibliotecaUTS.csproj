@@ -174,7 +174,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioApiController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="Core\Serializer.cs" />
+    <Compile Include="Core\Utils\AjaxOnlyAttribute.cs" />
+    <Compile Include="Core\Cache\ICacheHelper.cs" />
+    <Compile Include="Core\Sesion\IMembershipProvider.cs" />
+    <Compile Include="Core\Utils\JResult.cs" />
+    <Compile Include="Core\Sesion\MembershipProvider.cs" />
+    <Compile Include="Core\Utils\Serializer.cs" />
+    <Compile Include="Core\Cache\SessionHelper.cs" />
+    <Compile Include="Core\Sesion\SsAuthorizeAttribute.cs" />
+    <Compile Include="Core\Sesion\SsPrincipal.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

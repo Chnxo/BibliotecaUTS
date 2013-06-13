@@ -2,7 +2,7 @@
 var globalDTO = function () {
     return {
         viewModel: {},
-        modalMessage: {},
+        modalEliminar: {},
         modalForm: {}
     };
 } ();
@@ -19,6 +19,15 @@ bibliotecaApp.service('UsuarioService', ['$http', function ($http) {
         return $http.put('/api/usuarioapi', usuario)
             .success(success)
             .error(fail);
+    };
+    this.eliminar = function (usuarioToDelete, success, fail) {
+        return $http({
+            method: 'DELETE',
+            url: '/api/usuarioapi',
+            params: { usuarioId: usuarioToDelete }
+        })
+        .success(success)
+        .error(fail);
     };
 } ]);
 

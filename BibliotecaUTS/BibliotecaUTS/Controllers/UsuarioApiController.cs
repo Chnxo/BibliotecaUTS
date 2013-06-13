@@ -31,7 +31,7 @@ namespace BibliotecaUTS.Controllers
         }
 
         // POST api/usuarioapi
-        public void Post(Usuario usuario)
+        public int Post(Usuario usuario)
         {
             try
             {
@@ -40,6 +40,8 @@ namespace BibliotecaUTS.Controllers
             catch
             {
             }
+
+            return usuario.IdUsuario;
         }
 
         // PUT api/usuarioapi/5
@@ -56,8 +58,17 @@ namespace BibliotecaUTS.Controllers
         }
 
         // DELETE api/usuarioapi/5
-        public void Delete(int id)
+        public void Delete(int usuarioId)
         {
+            try
+            {
+                _usuarioRepository.Eliminar(usuarioId);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

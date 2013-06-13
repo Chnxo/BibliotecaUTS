@@ -9,7 +9,7 @@ namespace Datos
     {
         void Agregar(T entidad);
 
-        void Eliminar(T entidad);
+        void Eliminar(int id);
 
         void Actualizar(T entidad);
 

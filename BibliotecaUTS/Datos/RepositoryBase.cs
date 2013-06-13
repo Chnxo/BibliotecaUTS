@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Data;
 
 namespace Datos
 {
@@ -18,11 +18,11 @@ namespace Datos
             }
         }
 
-        public void Eliminar(T entidad)
+        public void Eliminar(int id)
         {
             using (var contexto = new Contexto())
             {
-                contexto.Set<T>().Remove(entidad);
+                contexto.Set<T>().Remove(contexto.Set<T>().Find(id));
                 contexto.SaveChanges();
             }
         }
@@ -31,9 +31,7 @@ namespace Datos
         {
             using (var contexto = new Contexto())
             {
-                //dynamic entidadDinamica = entidad;
-                //entidadDinamica.EntityState = EntityState.Modified;
-                contexto.Set<T>().Attach(entidad);
+                contexto.Entry(entidad).State = EntityState.Modified;
                 contexto.SaveChanges();
             }
         }

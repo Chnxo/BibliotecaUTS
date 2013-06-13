@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace Datos
 {
@@ -30,6 +31,8 @@ namespace Datos
         {
             using (var contexto = new Contexto())
             {
+                //dynamic entidadDinamica = entidad;
+                //entidadDinamica.EntityState = EntityState.Modified;
                 contexto.Set<T>().Attach(entidad);
                 contexto.SaveChanges();
             }

@@ -8,7 +8,7 @@
     $scope.abrirUsuarioForm = function (usuario, $index) {
         if (typeof usuario !== 'undefined') {
             $scope.usuario = usuario;
-            $scope.usuarioFormLabel = "Editar Usuario";
+            $scope.usuarioFormLabel = "Editar Usuari";
             $scope.accionForma = "Guardar Cambios";
             $scope.estaAgregando = false;
         } else {

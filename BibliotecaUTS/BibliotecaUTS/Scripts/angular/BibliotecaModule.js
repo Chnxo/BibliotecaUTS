@@ -15,6 +15,11 @@ bibliotecaApp.service('UsuarioService', ['$http', function ($http) {
             .success(success)
             .error(fail);
     };
+    this.modificar = function (usuario, success, fail) {
+        return $http.put('/api/usuarioapi', usuario)
+            .success(success)
+            .error(fail);
+    };
 } ]);
 
 angular.resetForm = function (scope, formName, defaults) {

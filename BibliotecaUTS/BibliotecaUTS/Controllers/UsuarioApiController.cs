@@ -43,8 +43,16 @@ namespace BibliotecaUTS.Controllers
         }
 
         // PUT api/usuarioapi/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(Usuario usuario)
         {
+            try
+            {
+                _usuarioRepository.Actualizar(usuario);
+            }
+            catch
+            {
+                
+            }
         }
 
         // DELETE api/usuarioapi/5

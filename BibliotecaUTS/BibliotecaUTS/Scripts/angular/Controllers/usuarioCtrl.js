@@ -4,13 +4,15 @@
     $scope.usuarioFormLabel = "";
     $scope.accionForma = "";
     $scope.estaAgregando = true;
+    $scope.usuarioIndex;
 
-    $scope.abrirUsuarioForm = function (usuario, $index) {
+    $scope.abrirUsuarioForm = function (usuario, index) {
         if (typeof usuario !== 'undefined') {
-            $scope.usuario = usuario;
-            $scope.usuarioFormLabel = "Editar Usuari";
+            angular.copy(usuario, $scope.usuario);
+            $scope.usuarioFormLabel = "Editar Usuario";
             $scope.accionForma = "Guardar Cambios";
             $scope.estaAgregando = false;
+            $scope.usuarioIndex = index;
         } else {
             $scope.usuarioFormLabel = "Guardar Usuario";
             $scope.accionForma = "Guardar Usuario";
@@ -35,7 +37,9 @@
     };
 
     $scope.modificar = function () {
-        //TO DO
+        UsuarioService.modificar($scope.usuario, function (data) {
+            _cerrarFormulario();
+        });
     };
 
     UsuarioCtrl.CreateViewModel = function () {
@@ -43,6 +47,7 @@
 
         globalDTO.modalForm.on('hidden', function () {
             _limpiarFormulario();
+            _actualizarTabla();
         });
 
         _limpiarUsuario();
@@ -52,13 +57,17 @@
         _cerrarFormulario();
     };
 
+    function _actualizarTabla() {
+    
+    }
+
     function _limpiarFormulario() {
         angular.resetForm($scope, 'formaUsuario', {});
         _limpiarUsuario();
     }
 
     function _limpiarUsuario() {
-        $scope.usuario = $scope.viewModel.Usuario;
+        angular.copy($scope.viewModel.Usuario, $scope.usuario);
     }
 
     function _cerrarFormulario() {

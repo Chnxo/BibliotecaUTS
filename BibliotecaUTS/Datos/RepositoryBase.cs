@@ -30,7 +30,8 @@ namespace Datos
         {
             using (var contexto = new Contexto())
             {
-                // TO DO
+                contexto.Set<T>().Attach(entidad);
+                contexto.SaveChanges();
             }
         }
 
